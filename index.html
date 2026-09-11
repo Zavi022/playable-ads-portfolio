@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Zayan — Unity & Luna Playable Ads Developer portfolio." />
+  <title>Zayan | Unity & Luna Playable Ads</title>
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --panel: #12161b;
+      --panel-2: #171c22;
+      --text: #f5f7fa;
+      --muted: #9da7b3;
+      --line: #252c34;
+      --accent: #b9ff66;
+      --accent-2: #80d938;
+      --radius: 22px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(185,255,102,.08), transparent 30%),
+        radial-gradient(circle at 82% 8%, rgba(128,217,56,.05), transparent 26%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(14px);
+      background: rgba(11,13,16,.72);
+      z-index: 20;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-weight: 900;
+      letter-spacing: .06em;
+      font-size: 1.05rem;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .hero {
+      padding: 86px 0 56px;
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 7px 11px;
+      border: 1px solid rgba(185,255,102,.24);
+      background: rgba(185,255,102,.06);
+      color: var(--accent);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .82rem;
+      letter-spacing: .03em;
+    }
+
+    h1 {
+      margin: 18px 0 18px;
+      font-size: clamp(2.8rem, 7vw, 6.3rem);
+      line-height: .95;
+      letter-spacing: -.055em;
+      max-width: 820px;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero p {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin: 0 0 28px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-weight: 800;
+      border: 1px solid var(--line);
+      transition: .2s ease;
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: #111;
+      border-color: transparent;
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(185,255,102,.42);
+    }
+
+    .hero-card {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015));
+      border-radius: 28px;
+      padding: 22px;
+    }
+
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat:last-child { border-bottom: 0; }
+
+    .stat b { font-size: 1.02rem; }
+    .stat span { color: var(--muted); text-align: right; }
+
+    section { padding: 42px 0 66px; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      letter-spacing: -.035em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: var(--radius);
+      overflow: hidden;
+      min-width: 0;
+      transition: .22s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(185,255,102,.35);
+    }
+
+    .thumb {
+      aspect-ratio: 16 / 10;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(185,255,102,.10), transparent 40%),
+        linear-gradient(225deg, rgba(255,255,255,.06), transparent 34%),
+        #151a20;
+    }
+
+    .thumb::before,
+    .thumb::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+    }
+
+    .thumb::before {
+      width: 170px;
+      height: 170px;
+      background: rgba(185,255,102,.08);
+      top: -45px;
+      right: -30px;
+    }
+
+    .thumb::after {
+      width: 105px;
+      height: 105px;
+      background: rgba(255,255,255,.05);
+      bottom: -35px;
+      left: -20px;
+    }
+
+    .thumb-mark {
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: rgba(255,255,255,.90);
+      z-index: 2;
+      letter-spacing: -.04em;
+    }
+
+    .card-body { padding: 20px; }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(185,255,102,.08);
+      border: 1px solid rgba(185,255,102,.16);
+      color: var(--accent);
+      font-size: .76rem;
+      font-weight: 800;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.28rem;
+    }
+
+    .card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      min-height: 52px;
+    }
+
+    .card .btn {
+      width: 100%;
+      background: var(--panel-2);
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .skill {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.025);
+      padding: 17px;
+    }
+
+    .skill b {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .skill span {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .contact {
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background:
+        linear-gradient(135deg, rgba(185,255,102,.08), transparent 40%),
+        var(--panel);
+      padding: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .contact h2 {
+      margin: 0 0 8px;
+      letter-spacing: -.03em;
+    }
+
+    .contact p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    footer {
+      color: var(--muted);
+      padding: 24px 0 36px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-card { max-width: 560px; }
+      .grid { grid-template-columns: 1fr 1fr; }
+      .skills { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(var(--max), calc(100% - 24px)); }
+      .nav-links { display: none; }
+      .hero { padding-top: 56px; }
+      .grid { grid-template-columns: 1fr; }
+      .skills { grid-template-columns: 1fr; }
+      .section-head { align-items: start; flex-direction: column; }
+      .contact { align-items: start; flex-direction: column; padding: 24px; }
+      h1 { font-size: clamp(2.65rem, 16vw, 4.9rem); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a href="#" class="brand">ZAYAN<span>.</span></a>
+      <nav class="nav-links">
+        <a href="#work">Playables</a>
+        <a href="#skills">Capabilities</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <div>
+        <div class="eyebrow">Unity • Luna Playworks • HTML5</div>
+        <h1>Playable ads that <em>feel like games.</em></h1>
+        <p>
+          I build lightweight, mobile-first playable experiences with Unity and Luna Playworks —
+          from SDK integration and project reduction to gameplay adaptation, optimization, and browser testing.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="#work">View Playables</a>
+          <a class="btn secondary" href="#contact">Contact Me</a>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Development capabilities">
+        <div class="stat"><b>Engine</b><span>Unity / C#</span></div>
+        <div class="stat"><b>Playable</b><span>Luna Playworks</span></div>
+        <div class="stat"><b>Focus</b><span>Mobile & Browser</span></div>
+        <div class="stat"><b>Workflow</b><span>Optimize • Integrate • Test</span></div>
+      </aside>
+    </div>
+
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">SELECTED WORK</div>
+            <h2>Playable portfolio</h2>
+          </div>
+          <p>
+            Custom playable slots are ready. You can rename each project, change the thumbnail, description, tags, and add your own playable link later.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="thumb"><div class="thumb-mark">01</div></div>
+            <div class="card-body">
+              <div class="tag-row">
+                <span class="tag">Custom</span>
+                <span class="tag">Playable Ad</span>
+                <span class="tag">Demo</span>
+              </div>
+              <h3>Playable Project 01</h3>
+              <p>Add your own project name, short description, technology tags, thumbnail, and playable link here.</p>
+              <a class="btn" href="#" target="_blank" rel="noopener">Play Demo ↗</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="thumb"><div class="thumb-mark">02</div></div>
+            <div class="card-body">
+              <div class="tag-row">
+                <span class="tag">Custom</span>
+                <span class="tag">Playable Ad</span>
+                <span class="tag">Demo</span>
+              </div>
+              <h3>Playable Project 02</h3>
+              <p>Add your own project name, short description, technology tags, thumbnail, and playable link here.</p>
+              <a class="btn" href="#" target="_blank" rel="noopener">Play Demo ↗</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="thumb"><div class="thumb-mark">03</div></div>
+            <div class="card-body">
+              <div class="tag-row">
+                <span class="tag">Custom</span>
+                <span class="tag">Playable Ad</span>
+                <span class="tag">Demo</span>
+              </div>
+              <h3>Playable Project 03</h3>
+              <p>Add your own project name, short description, technology tags, thumbnail, and playable link here.</p>
+              <a class="btn" href="#" target="_blank" rel="noopener">Play Demo ↗</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="thumb"><div class="thumb-mark">04</div></div>
+            <div class="card-body">
+              <div class="tag-row">
+                <span class="tag">Custom</span>
+                <span class="tag">Playable Ad</span>
+                <span class="tag">Demo</span>
+              </div>
+              <h3>Playable Project 04</h3>
+              <p>Add your own project name, short description, technology tags, thumbnail, and playable link here.</p>
+              <a class="btn" href="#" target="_blank" rel="noopener">Play Demo ↗</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="thumb"><div class="thumb-mark">05</div></div>
+            <div class="card-body">
+              <div class="tag-row">
+                <span class="tag">Custom</span>
+                <span class="tag">Playable Ad</span>
+                <span class="tag">Demo</span>
+              </div>
+              <h3>Playable Project 05</h3>
+              <p>Add your own project name, short description, technology tags, thumbnail, and playable link here.</p>
+              <a class="btn" href="#" target="_blank" rel="noopener">Play Demo ↗</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="thumb"><div class="thumb-mark">06</div></div>
+            <div class="card-body">
+              <div class="tag-row">
+                <span class="tag">Custom</span>
+                <span class="tag">Playable Ad</span>
+                <span class="tag">Demo</span>
+              </div>
+              <h3>Playable Project 06</h3>
+              <p>Add your own project name, short description, technology tags, thumbnail, and playable link here.</p>
+              <a class="btn" href="#" target="_blank" rel="noopener">Play Demo ↗</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="thumb"><div class="thumb-mark">07</div></div>
+            <div class="card-body">
+              <div class="tag-row">
+                <span class="tag">Custom</span>
+                <span class="tag">Playable Ad</span>
+                <span class="tag">Demo</span>
+              </div>
+              <h3>Playable Project 07</h3>
+              <p>Add your own project name, short description, technology tags, thumbnail, and playable link here.</p>
+              <a class="btn" href="#" target="_blank" rel="noopener">Play Demo ↗</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="thumb"><div class="thumb-mark">08</div></div>
+            <div class="card-body">
+              <div class="tag-row">
+                <span class="tag">Custom</span>
+                <span class="tag">Playable Ad</span>
+                <span class="tag">Demo</span>
+              </div>
+              <h3>Playable Project 08</h3>
+              <p>Add your own project name, short description, technology tags, thumbnail, and playable link here.</p>
+              <a class="btn" href="#" target="_blank" rel="noopener">Play Demo ↗</a>
+            </div>
+          </article>
+          <article class="card">
+            <div class="thumb"><div class="thumb-mark">09</div></div>
+            <div class="card-body">
+              <div class="tag-row">
+                <span class="tag">Custom</span>
+                <span class="tag">Playable Ad</span>
+                <span class="tag">Demo</span>
+              </div>
+              <h3>Playable Project 09</h3>
+              <p>Add your own project name, short description, technology tags, thumbnail, and playable link here.</p>
+              <a class="btn" href="#" target="_blank" rel="noopener">Play Demo ↗</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">CAPABILITIES</div>
+            <h2>What I handle</h2>
+          </div>
+          <p>Focused on turning existing game projects into compact, testable, mobile-friendly playable ad experiences.</p>
+        </div>
+
+        <div class="skills">
+          <div class="skill">
+            <b>Luna SDK Integration</b>
+            <span>Playable SDK setup, event flow, CTA logic, and export preparation.</span>
+          </div>
+          <div class="skill">
+            <b>Project Reduction</b>
+            <span>Remove unused scenes, code, textures, audio, shaders, and dependencies.</span>
+          </div>
+          <div class="skill">
+            <b>Gameplay Adaptation</b>
+            <span>Shorten core loops, add hooks, tutorial cues, win/fail flow, and CTA moments.</span>
+          </div>
+          <div class="skill">
+            <b>Mobile Optimization</b>
+            <span>Responsive UI, performance checks, orientation handling, and browser/device testing.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact">
+          <div>
+            <h2>Need a playable ad?</h2>
+            <p>
+              Share the game project, target platform requirements, and playable brief. I can review feasibility before production starts.
+            </p>
+          </div>
+          <div class="actions">
+            <!-- CHANGE THESE TWO LINKS -->
+            <a class="btn primary" href="mailto:your@email.com">Email Me</a>
+            <a class="btn secondary" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> Zayan. Unity & Luna Playable Ads Developer.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
